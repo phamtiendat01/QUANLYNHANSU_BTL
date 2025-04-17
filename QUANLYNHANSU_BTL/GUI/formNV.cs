@@ -92,7 +92,7 @@ namespace QUANLYNHANSU_BTL.GUI
                     ShowForm(new ChamCongNVForm(nv.MaNV)); // Form chấm công
                     break;
                 case "btnBangLuong":
-                    ShowForm(new BangLuongNVForm()); // Form bảng lương
+                    ShowForm(new BangLuongNVForm(nv.MaNV)); // Form bảng lương
                     break;
                 case "btnHeThong":
                     ShowForm(new HeThongNVForm()); // Form hệ thống

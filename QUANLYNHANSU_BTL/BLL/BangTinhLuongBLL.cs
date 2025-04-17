@@ -114,6 +114,10 @@ namespace QUANLYNHANSU_BTL.BLL
 
             return result;
         }
+        public DataTable GetTotalSalaryByMaNV(string maNV)
+        {
+            return new BangTinhLuongDAL().GetTotalSalaryByMaNV(maNV);
+        }
 
         // 4. Lương từng phòng ban theo từng tháng (cho stacked column)
         public Dictionary<string, Dictionary<string, double>> GetLuongPhongBanTheoThang()

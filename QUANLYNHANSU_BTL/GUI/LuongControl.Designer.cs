@@ -15,6 +15,8 @@ namespace QUANLYNHANSU_BTL.GUI
 
         private void InitializeComponent()
         {
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             lblTitle = new Label();
             lblTongLuong = new Label();
             chartLuongTheoThang = new CartesianChart();
@@ -63,15 +65,21 @@ namespace QUANLYNHANSU_BTL.GUI
             // 
             // cmbThang
             // 
-            cmbThang.Name = "cmbThang";
-            cmbThang.Location = new Point(3, 421);
-            cmbThang.Size = new Size(200, 36);
+            cmbThang.BackColor = Color.Transparent;
             cmbThang.BorderRadius = 8;
+            cmbThang.CustomizableEdges = customizableEdges1;
+            cmbThang.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbThang.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbThang.FillColor = Color.FromArgb(0, 123, 255);
+            cmbThang.FocusedColor = Color.Empty;
             cmbThang.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             cmbThang.ForeColor = Color.White;
-            cmbThang.FillColor = Color.FromArgb(0, 123, 255);
             cmbThang.HoverState.FillColor = Color.FromArgb(30, 144, 255);
-            cmbThang.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbThang.ItemHeight = 30;
+            cmbThang.Location = new Point(3, 421);
+            cmbThang.Name = "cmbThang";
+            cmbThang.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            cmbThang.Size = new Size(200, 36);
             cmbThang.TabIndex = 6;
             cmbThang.SelectedIndexChanged += cmbThang_SelectedIndexChanged;
             // 

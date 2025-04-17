@@ -144,6 +144,7 @@ namespace QUANLYNHANSU_BTL.GUI
             lblLoaiNV.Size = new Size(385, 27);
             lblLoaiNV.TabIndex = 9;
             lblLoaiNV.Text = "Loại nhân viên:";
+            lblLoaiNV.Click += lblLoaiNV_Click;
             // 
             // lblChucVu
             // 

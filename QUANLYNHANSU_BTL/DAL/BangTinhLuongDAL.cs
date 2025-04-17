@@ -287,6 +287,59 @@ namespace QUANLYNHANSU_BTL.DAL
                 ORDER BY MIN(ThangNam)";
             return DatabaseHelper.ExecuteQuery(query);
         }
+        public List<BangTinhLuongDTO> GetByMonthAndMaNV(DateTime month, string maNV)
+        {
+            string query = @"
+        SELECT 
+            tl.MaTinhLuong, 
+            nv.HoTen, 
+            nv.ChucVu,
+            tl.MaNV,
+            tl.ThangNam,
+            tl.SoNgayCong,
+            tl.SoNgayOT,
+            tl.LuongCoBan,
+            tl.PhuCapChucVu,
+            tl.PhuCapKhac,
+            tl.TienLuongOT,
+            tl.TienPhat,
+            tl.TongLuong
+        FROM 
+            BangTinhLuong tl
+        INNER JOIN NhanVien nv ON tl.MaNV = nv.MaNV
+        WHERE 
+            FORMAT(tl.ThangNam, 'MM/yyyy') = @ThangNam AND tl.MaNV = @MaNV";
+
+            SqlParameter[] parameters = {
+        new SqlParameter("@ThangNam", month.ToString("MM/yyyy")),
+        new SqlParameter("@MaNV", maNV)
+    };
+            DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
+
+            List<BangTinhLuongDTO> list = new List<BangTinhLuongDTO>();
+            foreach (DataRow row in dt.Rows)
+            {
+                list.Add(new BangTinhLuongDTO
+                {
+                    MaTinhLuong = row["MaTinhLuong"].ToString(),
+                    HoTen = row["HoTen"].ToString(),
+                    ChucVu = row["ChucVu"].ToString(),
+                    MaNV = Convert.ToInt32(row["MaNV"]),
+                    ThangNam = Convert.ToDateTime(row["ThangNam"]),
+                    SoNgayCong = Convert.ToInt32(row["SoNgayCong"]),
+                    SoNgayOT = Convert.ToInt32(row["SoNgayOT"]),
+                    LuongCoBan = Convert.ToSingle(row["LuongCoBan"]),
+                    PhuCapChucVu = Convert.ToSingle(row["PhuCapChucVu"]),
+                    PhuCapKhac = Convert.ToSingle(row["PhuCapKhac"]),
+                    TienLuongOT = Convert.ToSingle(row["TienLuongOT"]),
+                    TienPhat = Convert.ToSingle(row["TienPhat"]),
+                    TongLuong = Convert.ToSingle(row["TongLuong"]),
+                });
+            }
+            return list;
+        }
+
+
 
         // 2. Tổng tiền lương theo từng phòng ban (JOIN NhanVien)
         public static DataTable ThongKeTongLuongTheoPhongBan()
@@ -328,6 +381,23 @@ namespace QUANLYNHANSU_BTL.DAL
                 ORDER BY MIN(btl.ThangNam), nv.PhongBan";
             return DatabaseHelper.ExecuteQuery(query);
         }
+        public DataTable GetTotalSalaryByMaNV(string maNV)
+        {
+            string query = @"
+            SELECT 
+                FORMAT(ThangNam, 'MM/yyyy') AS Thang,
+                SUM(TongLuong) AS TongTien
+            FROM 
+                BangTinhLuong
+            WHERE 
+                MaNV = @MaNV
+            GROUP BY 
+                FORMAT(ThangNam, 'MM/yyyy')";
+
+            SqlParameter[] parameters = { new SqlParameter("@MaNV", maNV) };
+            return DatabaseHelper.ExecuteQuery(query, parameters); // Trả về DataTable chứa thông tin tổng lương theo từng tháng
+        }
+
 
 
 

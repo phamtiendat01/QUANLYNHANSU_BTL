@@ -108,13 +108,17 @@ namespace QUANLYNHANSU_BTL.DAL
 
             // Thực thi truy vấn và trả về Base64 string của ảnh
             DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
-            if (dt.Rows.Count > 0)
+            byte[] imageBytes = null;
+
+            // Kiểm tra xem trường Avatar có giá trị NULL không
+            if (dt.Rows[0]["Avatar"] != DBNull.Value)
             {
-                // Nếu có ảnh trong cơ sở dữ liệu, trả về Base64
-                byte[] imageBytes = (byte[])dt.Rows[0]["Avatar"];
-                return Convert.ToBase64String(imageBytes);  // Trả về ảnh dưới dạng Base64
+                imageBytes = (byte[])dt.Rows[0]["Avatar"];
+                return Convert.ToBase64String(imageBytes);  // Chuyển đổi ảnh thành Base64
             }
-            return null;
+
+            return null;  // Nếu không có ảnh, trả về null
+
         }
 
 

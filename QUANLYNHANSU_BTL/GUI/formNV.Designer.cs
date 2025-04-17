@@ -20,7 +20,7 @@ namespace QUANLYNHANSU_BTL.GUI
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formNV));
             pnlSidebar = new Panel();
             pbxLogo = new PictureBox();
             btnDangXuat = new IconButton();
@@ -46,7 +46,7 @@ namespace QUANLYNHANSU_BTL.GUI
             pnlSidebar.Dock = DockStyle.Left;
             pnlSidebar.Location = new Point(0, 0);
             pnlSidebar.Name = "pnlSidebar";
-            pnlSidebar.Size = new Size(220, 771);
+            pnlSidebar.Size = new Size(220, 719);
             pnlSidebar.TabIndex = 1;
             pnlSidebar.Paint += pnlSidebar_Paint;
             // 
@@ -72,7 +72,7 @@ namespace QUANLYNHANSU_BTL.GUI
             btnDangXuat.IconColor = Color.White;
             btnDangXuat.IconFont = IconFont.Auto;
             btnDangXuat.IconSize = 20;
-            btnDangXuat.Location = new Point(20, 673);
+            btnDangXuat.Location = new Point(20, 621);
             btnDangXuat.Name = "btnDangXuat";
             btnDangXuat.Size = new Size(150, 45);
             btnDangXuat.TabIndex = 1;
@@ -98,7 +98,7 @@ namespace QUANLYNHANSU_BTL.GUI
             lblFooter.Dock = DockStyle.Bottom;
             lblFooter.Font = new Font("Arial", 10F);
             lblFooter.ForeColor = Color.Gray;
-            lblFooter.Location = new Point(0, 721);
+            lblFooter.Location = new Point(0, 669);
             lblFooter.Name = "lblFooter";
             lblFooter.Size = new Size(220, 50);
             lblFooter.TabIndex = 2;
@@ -112,7 +112,7 @@ namespace QUANLYNHANSU_BTL.GUI
             pnlMainContent.Dock = DockStyle.Fill;
             pnlMainContent.Location = new Point(220, 0);
             pnlMainContent.Name = "pnlMainContent";
-            pnlMainContent.Size = new Size(1329, 771);
+            pnlMainContent.Size = new Size(1217, 719);
             pnlMainContent.TabIndex = 0;
             // 
             // pbBackground
@@ -122,7 +122,7 @@ namespace QUANLYNHANSU_BTL.GUI
             pbBackground.Image = (Image)resources.GetObject("pbBackground.Image");
             pbBackground.Location = new Point(0, 0);
             pbBackground.Name = "pbBackground";
-            pbBackground.Size = new Size(1329, 771);
+            pbBackground.Size = new Size(1217, 719);
             pbBackground.SizeMode = PictureBoxSizeMode.StretchImage;
             pbBackground.TabIndex = 0;
             pbBackground.TabStop = false;
@@ -135,19 +135,19 @@ namespace QUANLYNHANSU_BTL.GUI
             lblTime.BackColor = Color.Transparent;
             lblTime.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
             lblTime.ForeColor = Color.DarkBlue;
-            lblTime.Location = new Point(149, 30);
+            lblTime.Location = new Point(93, 30);
             lblTime.Name = "lblTime";
             lblTime.Size = new Size(0, 50);
             lblTime.TabIndex = 0;
             lblTime.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // MainForm
+            // formNV
             // 
-            ClientSize = new Size(1549, 771);
+            ClientSize = new Size(1437, 719);
             Controls.Add(pnlMainContent);
             Controls.Add(pnlSidebar);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "MainForm";
+            Name = "formNV";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý nhân sự";
             pnlSidebar.ResumeLayout(false);

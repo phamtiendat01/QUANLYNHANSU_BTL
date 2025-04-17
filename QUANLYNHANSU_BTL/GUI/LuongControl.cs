@@ -222,14 +222,6 @@ namespace QUANLYNHANSU_BTL.GUI
         }
 
 
-        private void chartLuongStacked_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
-        {
-
-        }
-
-        private void lblTongLuong_Click(object sender, EventArgs e)
-        {
-
-        }
+    
     }
 }

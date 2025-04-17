@@ -12,9 +12,10 @@ namespace QUANLYNHANSU_BTL.GUI
 {
     public partial class BangLuongNVForm : Form
     {
-        public BangLuongNVForm()
+       
+        private void panelContent_Paint(object sender, PaintEventArgs e)
         {
-            InitializeComponent();
+
         }
     }
 }

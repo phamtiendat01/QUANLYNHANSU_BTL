@@ -116,5 +116,10 @@ namespace QUANLYNHANSU_BTL.GUI
                 LoadChamCongData();
             }
         }
+
+        private void guna2DataGridViewChamCong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

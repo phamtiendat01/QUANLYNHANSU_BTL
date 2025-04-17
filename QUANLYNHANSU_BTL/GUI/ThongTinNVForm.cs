@@ -88,7 +88,7 @@ namespace QUANLYNHANSU_BTL.GUI
                 picAvatar.Image = Image.FromFile(filePath);
 
                 // Lưu ảnh vào cơ sở dữ liệu (dưới dạng mảng byte)
-                bool success = NhanVienBLL.SaveAvatar( nv.MaNV, filePath);
+                bool success = NhanVienBLL.SaveAvatar(nv.MaNV, filePath);
 
                 if (success)
                 {
@@ -106,6 +106,11 @@ namespace QUANLYNHANSU_BTL.GUI
         private void pnlInfo_Paint(object sender, PaintEventArgs e)
         {
             // Optional: Bạn có thể xử lý các sự kiện vẽ nếu cần thiết
+        }
+
+        private void lblLoaiNV_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

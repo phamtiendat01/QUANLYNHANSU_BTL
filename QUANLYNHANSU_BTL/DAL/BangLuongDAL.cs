@@ -2,6 +2,7 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
 using QUANLYNHANSU_BTL.DTO;
+using QUANLYNHANSU_BTL.GUI;
 
 namespace QUANLYNHANSU_BTL.DAL
 {
@@ -37,7 +38,7 @@ namespace QUANLYNHANSU_BTL.DAL
             }
             return null;
         }
-
+       
 
 
 
