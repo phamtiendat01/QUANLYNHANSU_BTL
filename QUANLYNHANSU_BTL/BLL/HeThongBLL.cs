@@ -8,11 +8,16 @@ namespace QUANLYNHANSU_BTL.BLL
     {
         private TaiKhoanDAL dal = new TaiKhoanDAL();
 
-        public List<TaiKhoan> GetAll() => dal.GetAll();
-        public bool Insert(TaiKhoan tk) => dal.Insert(tk);
-        public bool Update(TaiKhoan tk) => dal.Update(tk);
+        public List<TaiKhoanDTO> GetAll() => dal.GetAll();
+
+        public bool Insert(TaiKhoanDTO tk) => dal.Insert(tk);
+
+        public bool Update(TaiKhoanDTO tk) => dal.Update(tk);
+
         public bool Delete(string tenDangNhap) => dal.Delete(tenDangNhap);
-        public List<TaiKhoan> Search(string keyword) => dal.Search(keyword);
+
+        public List<TaiKhoanDTO> Search(string keyword) => dal.Search(keyword);
+
         public static TaiKhoanDTO KiemTraDangNhap(string tenDN, string matKhau)
         {
             return TaiKhoanDAL.DangNhap(tenDN, matKhau);

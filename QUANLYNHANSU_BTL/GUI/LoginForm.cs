@@ -48,7 +48,7 @@ namespace QUANLYNHANSU_BTL.GUI
             else
             {
                 // Lấy thông tin nhân viên
-                NhanVienDTO nv = NhanVienBLL.GetNhanVienInfo(tk.MaNV);  // Lấy thông tin nhân viên từ BLL
+                NhanVienDTO nv = NhanVienBLL.GetNhanVienInfo(tk.MaNV.Value);  // Lấy thông tin nhân viên từ BLL
                 Console.WriteLine($"MaNV khi lấy thông tin nhân viên: {tk.MaNV}");
                 if (nv != null)
                 {
@@ -77,14 +77,6 @@ namespace QUANLYNHANSU_BTL.GUI
             txtPassword.UseSystemPasswordChar = !chkShowPassword.Checked;
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTitle_Click(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }

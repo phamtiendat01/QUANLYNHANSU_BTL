@@ -11,7 +11,7 @@ namespace QUANLYNHANSU_BTL.GUI
     public partial class HeThongForm : Form
     {
         private readonly TaiKhoanBLL taiKhoanBLL = new TaiKhoanBLL();
-        private List<TaiKhoan> danhSachGoc = new List<TaiKhoan>();
+        private List<TaiKhoanDTO> danhSachGoc = new List<TaiKhoanDTO>();
         private int pageSize = 10;
         private int currentPage = 1;
 
@@ -36,15 +36,22 @@ namespace QUANLYNHANSU_BTL.GUI
 
             dgvTaiKhoan.DataSource = dsHienThi;
 
+            // Đặt lại thứ tự cột theo đúng trình tự trong cơ sở dữ liệu
+            dgvTaiKhoan.Columns["MaNV"].DisplayIndex = 0;
+            dgvTaiKhoan.Columns["TenDangNhap"].DisplayIndex = 1;
+            dgvTaiKhoan.Columns["MatKhau"].DisplayIndex = 2;
+            dgvTaiKhoan.Columns["HoTen"].DisplayIndex = 3;
+            dgvTaiKhoan.Columns["VaiTro"].DisplayIndex = 4;
+            dgvTaiKhoan.Columns["TrangThai"].DisplayIndex = 5;
+
+
             lblPage.Text = $"Trang {currentPage}/{Math.Ceiling((double)danhSachGoc.Count / pageSize)}";
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string keyword = txtSearch.Text.ToLower().Trim();
-            danhSachGoc = taiKhoanBLL.GetAll()
-                .Where(tk => tk.TenDangNhap.ToLower().Contains(keyword))
-                .ToList();
+            danhSachGoc = taiKhoanBLL.Search(keyword);
 
             currentPage = 1;
             CapNhatDataGridView();
@@ -91,16 +98,17 @@ namespace QUANLYNHANSU_BTL.GUI
             if (dgvTaiKhoan.SelectedRows.Count > 0)
             {
                 var row = dgvTaiKhoan.SelectedRows[0];
-                var tk = new TaiKhoan
+                var tk = new TaiKhoanDTO
                 {
                     TenDangNhap = row.Cells["TenDangNhap"].Value.ToString(),
                     MatKhau = row.Cells["MatKhau"].Value.ToString(),
                     HoTen = row.Cells["HoTen"].Value.ToString(),
                     VaiTro = row.Cells["VaiTro"].Value.ToString(),
-                    TrangThai = (bool)row.Cells["TrangThai"].Value
+                    TrangThai = (bool)row.Cells["TrangThai"].Value,
+                    MaNV = row.Cells["MaNV"].Value != DBNull.Value ? Convert.ToInt32(row.Cells["MaNV"].Value) : (int?)null
                 };
 
-                var popup = new TaiKhoanPopupForm(tk);
+                var popup = new TaiKhoanPopupForm( tk);
                 if (popup.ShowDialog() == DialogResult.OK)
                 {
                     taiKhoanBLL.Update(popup.TaiKhoanDuocNhap);

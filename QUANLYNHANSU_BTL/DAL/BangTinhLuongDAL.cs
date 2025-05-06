@@ -392,6 +392,8 @@ namespace QUANLYNHANSU_BTL.DAL
             WHERE 
                 MaNV = @MaNV
             GROUP BY 
+                FORMAT(ThangNam, 'MM/yyyy')
+            ORDER BY
                 FORMAT(ThangNam, 'MM/yyyy')";
 
             SqlParameter[] parameters = { new SqlParameter("@MaNV", maNV) };

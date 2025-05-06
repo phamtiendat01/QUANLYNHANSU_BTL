@@ -108,7 +108,6 @@ namespace QUANLYNHANSU_BTL.GUI
             lblTitle.Size = new Size(297, 41);
             lblTitle.TabIndex = 1;
             lblTitle.Text = "QUẢN LÝ NHÂN SỰ";
-            lblTitle.Click += lblTitle_Click;
             // 
             // iconUser
             // 
@@ -162,7 +161,6 @@ namespace QUANLYNHANSU_BTL.GUI
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ĐĂNG NHẬP";
-            Load += LoginForm_Load;
             ((System.ComponentModel.ISupportInitialize)iconUser).EndInit();
             ((System.ComponentModel.ISupportInitialize)iconLock).EndInit();
             ((System.ComponentModel.ISupportInitialize)iconTop).EndInit();

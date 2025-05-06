@@ -42,7 +42,7 @@ namespace QUANLYNHANSU_BTL.GUI
             cartesianChart.Size = new Size(619, 187);
             cartesianChart.TabIndex = 1;
             cartesianChart.Text = "Tính lương chart";
-            cartesianChart.ChildChanged += cartesianChart_ChildChanged;
+            cartesianChart.DataClick += CartesianChart_DataClick;
             // 
             // detailsPanel
             // 

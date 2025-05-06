@@ -15,49 +15,52 @@ namespace QUANLYNHANSU_BTL.GUI
     {
 
         private string maNV;  // Mã nhân viên từ tài khoản đăng nhập
+        private Dictionary<int, string> monthMapping; // Khai báo monthMapping ở cấp độ lớp
+
 
 
         public BangTinhLuongNV(string maNV)
         {
             InitializeComponent();
             this.maNV = maNV;  // Lưu mã nhân viên
+            monthMapping = new Dictionary<int, string>(); // Khởi tạo monthMapping
+
             LoadChartData();  // Gọi hàm để tải dữ liệu cho biểu đồ
-            cartesianChart.DataClick += CartesianChart_DataClick;  // Đảm bảo đúng sự kiện và handler
 
         }
-        
-
         public void LoadChartData()
         {
-
             var bangTinhLuongBLL = new BangTinhLuongBLL();
-            var data = bangTinhLuongBLL.GetTotalSalaryByMaNV(maNV);  // Gọi t  // Gọi từ lớp (đúng)
+            var data = bangTinhLuongBLL.GetTotalSalaryByMaNV(maNV);
 
-            var series = new SeriesCollection();
+            var columnSeries = new ColumnSeries
+            {
+                Title = "Tổng lương",
+                Values = new ChartValues<double>()
+            };
+
+            monthMapping.Clear();
 
             foreach (DataRow row in data.Rows)
             {
-                string month = row["Thang"].ToString();  // Tháng
-                double totalSalary = Convert.ToDouble(row["TongTien"]);  // Tổng lương của nhân viên trong tháng đó
+                string month = row["Thang"].ToString();
+                double totalSalary = Convert.ToDouble(row["TongTien"]);
 
-                // Thêm vào biểu đồ cột
-                series.Add(new ColumnSeries
-                {
-                    Title = month,
-                    Values = new ChartValues<double> { totalSalary }
-                });
+                columnSeries.Values.Add(totalSalary);
+
+                int monthIndex = monthMapping.Count;
+                monthMapping[monthIndex] = month;
             }
 
-            // Cập nhật dữ liệu biểu đồ với tổng lương của từng tháng
-            cartesianChart.Series = series;
+            cartesianChart.Series.Clear();
+            cartesianChart.Series.Add(columnSeries);
 
-            // Cập nhật trục X với tên các tháng
+            cartesianChart.AxisX.Clear();
             cartesianChart.AxisX.Add(new Axis
             {
                 Title = "Tháng",
-                Labels = data.AsEnumerable().Select(row => row["Thang"].ToString()).ToArray()
+                Labels = monthMapping.Values.ToArray()
             });
-
         }
 
 
@@ -89,27 +92,33 @@ namespace QUANLYNHANSU_BTL.GUI
         // Sự kiện khi người dùng click vào cột trong biểu đồ
         private void CartesianChart_DataClick(object sender, ChartPoint point)
         {
-            var clickedMonth = cartesianChart.AxisX[0].Labels[(int)point.X]; // Lấy tháng từ trục X của biểu đồ
-
-            // Kiểm tra tháng có hợp lệ không (cần format đúng)
-            DateTime parsedMonth;
-            if (DateTime.TryParse(clickedMonth, out parsedMonth))
+            // Lấy tháng từ dictionary thay vì trực tiếp từ Labels
+            int clickedMonthIndex = (int)point.X;
+            if (monthMapping.ContainsKey(clickedMonthIndex))
             {
-                // Gọi hàm để tải dữ liệu chi tiết lương theo tháng và mã nhân viên
-                LoadSalaryDetailsForMonth(parsedMonth.ToString("MM/yyyy"));
+                string clickedMonth = monthMapping[clickedMonthIndex];  // Lấy tháng bằng chỉ số
+
+                // Kiểm tra tháng có hợp lệ không (cần format đúng)
+                DateTime parsedMonth;
+                if (DateTime.TryParseExact(clickedMonth, "MM/yyyy", null, System.Globalization.DateTimeStyles.None, out parsedMonth))
+                {
+                    // Gọi hàm để tải dữ liệu chi tiết lương theo tháng và mã nhân viên
+                    LoadSalaryDetailsForMonth(parsedMonth.ToString("MM/yyyy"));
+                }
+                else
+                {
+                    MessageBox.Show("Dữ liệu tháng không hợp lệ.");
+                }
             }
             else
             {
-                MessageBox.Show("Dữ liệu tháng không hợp lệ.");
+                MessageBox.Show("Không có dữ liệu cho tháng này.");
             }
         }
 
+
+
         private void BangTinhLuongNV_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cartesianChart_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
         {
 
         }

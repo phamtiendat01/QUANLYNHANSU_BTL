@@ -7,10 +7,10 @@ namespace QUANLYNHANSU_BTL.GUI
 {
     public partial class TaiKhoanPopupForm : Form
     {
-        public TaiKhoan TaiKhoanDuocNhap { get; private set; }
+        public TaiKhoanDTO TaiKhoanDuocNhap { get; private set; }
         private bool isEdit;
 
-        public TaiKhoanPopupForm(TaiKhoan tk = null)
+        public TaiKhoanPopupForm(TaiKhoanDTO tk = null)
         {
             InitializeComponent();
             isEdit = tk != null;
@@ -20,6 +20,7 @@ namespace QUANLYNHANSU_BTL.GUI
                 Text = "Sửa tài khoản";
                 LoadThongTin(tk);
                 txtTenDangNhap.Enabled = false; // Không cho sửa tên đăng nhập
+                txtMaNV.Enabled = false; // Không cho sửa MaNV nếu đang edit
             }
             else
             {
@@ -29,33 +30,40 @@ namespace QUANLYNHANSU_BTL.GUI
             btnLuu.Click += BtnLuu_Click;
         }
 
-        private void LoadThongTin(TaiKhoan tk)
+        private void LoadThongTin(TaiKhoanDTO tk)
         {
             txtTenDangNhap.Text = tk.TenDangNhap;
             txtMatKhau.Text = tk.MatKhau;
             txtHoTen.Text = tk.HoTen;
+            txtMaNV.Text = tk.MaNV.ToString();
             cmbVaiTro.SelectedItem = tk.VaiTro;
             toggleTrangThai.Checked = tk.TrangThai;
         }
 
         private void BtnLuu_Click(object sender, EventArgs e)
         {
-            // Kiểm tra dữ liệu
             if (string.IsNullOrWhiteSpace(txtTenDangNhap.Text) ||
                 string.IsNullOrWhiteSpace(txtMatKhau.Text) ||
                 string.IsNullOrWhiteSpace(txtHoTen.Text) ||
+                string.IsNullOrWhiteSpace(txtMaNV.Text) ||
                 cmbVaiTro.SelectedItem == null)
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Gán dữ liệu
-            TaiKhoanDuocNhap = new TaiKhoan
+            if (!int.TryParse(txtMaNV.Text.Trim(), out int maNV))
+            {
+                MessageBox.Show("Mã nhân viên phải là số!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            TaiKhoanDuocNhap = new TaiKhoanDTO
             {
                 TenDangNhap = txtTenDangNhap.Text.Trim(),
                 MatKhau = txtMatKhau.Text,
                 HoTen = txtHoTen.Text.Trim(),
+                MaNV = maNV,
                 VaiTro = cmbVaiTro.SelectedItem.ToString(),
                 TrangThai = toggleTrangThai.Checked
             };

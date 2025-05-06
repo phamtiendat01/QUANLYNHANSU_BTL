@@ -27,10 +27,12 @@ namespace QUANLYNHANSU_BTL.GUI
             btnBangLuong = CreateSidebarButton("Bảng lương", "btnBangLuong", yPosition += 50);
             btnBaoCao = CreateSidebarButton("Báo cáo", "btnBaoCao", yPosition += 50);
             btnHeThong = CreateSidebarButton("Hệ thống", "btnHeThong", yPosition += 50);
+            btnCongTac = CreateSidebarButton("Công tác", "btnCongTac", yPosition += 50);
+
 
             pnlSidebar.Controls.AddRange(new Button[]
             {
-                btnTrangChu, btnNhanVien, btnBoPhan, btnChamCong, btnBangLuong, btnBaoCao, btnHeThong
+                btnTrangChu, btnNhanVien, btnBoPhan, btnChamCong, btnBangLuong, btnBaoCao, btnHeThong,btnCongTac
             });
         }
 
@@ -94,6 +96,9 @@ namespace QUANLYNHANSU_BTL.GUI
                     break;
                 case "btnHeThong":
                     ShowForm(new HeThongForm());
+                    break;
+                case "btnCongTac":
+                    ShowForm(new CongTacForm());
                     break;
             }
         }

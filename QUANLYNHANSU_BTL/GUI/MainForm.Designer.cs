@@ -16,7 +16,7 @@ namespace QUANLYNHANSU_BTL.GUI
         private Label lblDate;
         private System.Windows.Forms.Timer timerClock;
         private FontAwesome.Sharp.IconButton btnDangXuat;
-        private Button btnTrangChu, btnNhanVien, btnBoPhan, btnChamCong, btnBangLuong, btnBaoCao, btnHeThong;
+        private Button btnTrangChu, btnNhanVien, btnBoPhan, btnChamCong, btnBangLuong, btnBaoCao, btnHeThong, btnCongTac;
 
         private void InitializeComponent()
         {
